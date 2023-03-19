@@ -1,14 +1,27 @@
-// pages/api/paystack-webhook.js
+import bodyParser from "body-parser";
 
-export default async function handler(req, res) {
+// create middleware function to parse request body
+const parseBody = bodyParser.json();
+
+// create route to handle Paystack webhook events
+export default async function handler(
+  req,
+  res
+) {
   if (req.method === "POST") {
-    // Process the Paystack webhook event
-    const event = req.body;
-    console.log("Received Paystack webhook event:", event);
+    // use parseBody middleware to parse request body
+    parseBody(req, res, () => {
+      // access Paystack webhook event data
+      const event = req.body;
+      console.log(event);
 
-    // Send a response to acknowledge receipt of the event
-    res.status(200).send("OK");
+      // handle Paystack webhook event
+      // ...
+
+      // send response
+      res.status(200).end();
+    });
   } else {
-    res.status(404).send("Not found");
+    res.status(405).end();
   }
 }
