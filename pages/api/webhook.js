@@ -1,7 +1,7 @@
 import { Buffer } from "buffer";
 import crypto from "crypto";
 
-const paystackSecretKey = process.env.PAYSTACK_SECRET_KEY;
+const paystackSecretKey = "sk_test_8af66b83b1a31986ff06a8c48ea7558c6119963e";
 
 function verifyPaystackSignature(signature, body) {
   const hash = crypto
