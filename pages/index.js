@@ -7,7 +7,7 @@ import { usePaystackPayment } from "react-paystack";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-    const toast = useToast();
+  const toast = useToast();
   const [email, setEmail] = useState("matgold@gmail.com");
   const [phone, setPhone] = useState("08063856120");
   const [amount, setAmount] = useState(15200);
@@ -23,15 +23,15 @@ export default function Home() {
 
   const onSuccess = (reference) => {
     console.log("Successful");
-    console.log("ref", reference);
-      toast({
-        title: "Payment Successful.",
-        description: "Thanks for buying with us",
-        status: "success",
-        duration: 9000,
-        position: "top",
-        isClosable: true,
-      });
+    // console.log("ref", reference);
+    toast({
+      title: "Payment Successful.",
+      description: `Your transaction ID is ${reference.trxref}`,
+      status: "success",
+      duration: 20000,
+      position: "top",
+      isClosable: true,
+    });
   };
 
   const onClose = () => {
