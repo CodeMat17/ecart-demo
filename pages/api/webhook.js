@@ -1,16 +1,22 @@
-import { verifyPaystackEvent } from 'paystack'
 
-export default async function handlePaystackEvents(req, res) {
-  const event = req.body;
-  const secretKey = "sk_test_8af66b83b1a31986ff06a8c48ea7558c6119963e";
-  const isValid = verifyPaystackEvent(event, secretKey);
 
-    if (isValid) {
-      console.log("Received a valid Paystack event:", event);
-      // Do something with the event, e.g. update your database, send a notification, etc.
-      res.status(200).end();
-    } else {
-      console.log("Received an invalid Paystack event:", event);
-      res.status(400).end();
-    }
+export default async function handlePaystackWebhook(req, res) {
+   if (req.method === "POST") {
+     // check if the event is a successful payment event
+     if (req.body.event === "charge.success") {
+       // log the payment details to the console
+       console.log(
+         `Payment received: ${req.body.data.amount} ${req.body.data.currency}`
+       );
+
+       // send a response to Paystack to confirm receipt of the event
+       res.status(200).json({ status: "success" });
+     } else {
+       // send an error response for unrecognized events
+       res.status(400).json({ error: "Invalid event type" });
+     }
+   } else {
+     // send an error response for unsupported methods
+     res.status(405).json({ error: "Method not allowed" });
+   }
 }
