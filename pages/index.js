@@ -22,8 +22,6 @@ export default function Home() {
   };
 
   const onSuccess = (reference) => {
-    console.log("Successful");
-    // console.log("ref", reference);
     toast({
       title: "Payment Successful.",
       description: `Your transaction ID is ${reference.trxref}`,
