@@ -3,7 +3,7 @@
 export default function handler(req, res) {
   const events = req.body;
   console.log("events", events);
-  console.log("secret", secret);
+  console.log("secret", events.secret);
 
   res.status(200).json({ name: "John Doe" });
 }
