@@ -10,7 +10,7 @@ export default function Home() {
   const toast = useToast();
   const [email, setEmail] = useState("matgold@gmail.com");
   const [phone, setPhone] = useState("08063856120");
-  const [amount, setAmount] = useState(15200);
+  const [amount, setAmount] = useState(1520);
   const [format, setFormat] = useState(amount);
   const formattedAmount = format.toLocaleString("en-US");
 
@@ -33,7 +33,7 @@ export default function Home() {
   };
 
   const onClose = () => {
-    console.log("Closed");
+    console.log("Payment Closed");
   };
 
   const PayStackHook = () => {
@@ -79,7 +79,6 @@ export default function Home() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder='Enter your name'
               />
-
               <Input
                 mb='4'
                 value={phone}

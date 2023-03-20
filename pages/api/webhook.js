@@ -1,8 +1,12 @@
-export default async function handlePaystackWebhook(req, res) {
-  // Handle the Paystack webhook event here
-  const data = req.body;
+export default function handler(req, res) {
+  if (req.method === "POST") {
+    const event = req.body;
 
-    console.log("Received Paystack webhook event:", data);
+    console.log("Paystack webhook event received:", event);
+
     res.status(200).json({ message: "Webhook received successfully" });
-
+  } else {
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).json({ message: `Method ${req.method} not allowed` });
+  }
 }
